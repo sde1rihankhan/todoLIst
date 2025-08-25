@@ -6,32 +6,28 @@ let textUpdate = document.querySelector(".textUpdat");
 let editingElement = null;
 
 function add() {
+  let inputValue = inputs.value.trim();
+  console.log(inputValue);
 
-    let inputValue = inputs.value.trim();
-    console.log(inputValue);
-    
   if (inputValue == "") {
     alert("Enter your Task");
   } else {
-
-
     if (textUpdate.innerHTML === "Update" && editingElement) {
-        editingElement.textContent = inputValue;
-        textUpdate.innerText = "Add";
-        textUpdate.style.width = "60px";
-        inputs.value = "";
-        editingElement = null;
-        return;
-      }
-    
-      // Checking for duplicates and removing old ones
-      let existingTasks = [...texts.getElementsByTagName("ul")];
-      existingTasks.forEach((task) => {
-        if (task.innerText.trim() === inputValue) {
-          task.remove();
-        }
-      });
+      editingElement.textContent = inputValue;
+      textUpdate.innerText = "Add";
+      textUpdate.style.width = "60px";
+      inputs.value = "";
+      editingElement = null;
+      return;
+    }
 
+    // Checking for duplicates and removing old ones
+    let existingTasks = [...texts.getElementsByTagName("ul")];
+    existingTasks.forEach((task) => {
+      if (task.innerText.trim() === inputValue) {
+        task.remove();
+      }
+    });
 
     let newEle = document.createElement("ul");
     let listItem = document.createElement("li");
@@ -62,12 +58,9 @@ function add() {
 
     inputs.value = "";
 
-
-
     deleteimg.addEventListener("click", function () {
       newEle.remove();
     });
-
 
     edit.addEventListener("click", function () {
       inputs.value = listItem.firstChild.textContent;
